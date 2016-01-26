@@ -7,11 +7,13 @@ It can be used by any other applications or processes to interact with the Findu
 
 ## Installation / Development
 
-Pre-requisites:
+**Prerequisites:**
 
 * Install Git
 * Install Node.js
 * Install Babel
+
+**Installation:**
 
 1. Clone this repo
 2. Install dependencies: `npm install`
