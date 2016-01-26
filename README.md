@@ -21,6 +21,15 @@ It can be used by any other applications or processes to interact with the Findu
 
 Feel free to submit pull requests for enhancements. There is lots to do!
 
+## Schema / Models
+
+Currently only two basic example models exist to have something to start development with:
+
+* People
+* Posts
+
+![screenshot](./Assets/images/graphiql_screenshot.png)
+
 ## Abstraction
 
 GraphQL is used as an efficient abstraction layer to read from or write to the MSSQL database, based on pre-defined SQL definitions.
