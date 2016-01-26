@@ -1,0 +1,24 @@
+{
+  "name": "graphql-test1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-node5": "^10.1.1",
+    "express": "^4.13.3",
+    "express-graphql": "^0.4.5",
+    "faker": "^3.0.1",
+    "graphiql": "^0.4.5",
+    "graphql": "^0.4.14",
+    "lodash": "^3.10.1",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "sequelize": "^3.14.2",
+    "tedious": "^1.13.1"
+  }
+}
