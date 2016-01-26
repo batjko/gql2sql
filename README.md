@@ -37,8 +37,26 @@ Whether an API endpoint represents a single small reference table, or a large nu
 
 It is also secure from SQL Injection, as no direct SQL will be used by the clients connecting via this service.
 
-## Models
+## TODOs
 
-In order to make this service easily scalable, we should try to make our API endpoint models configurable, ideally via individual json files, which are then imported by the service and automatically turned into queries.
+| Backlog | In Progress | Done  |
+| --------|---------|-------|
+|         |         | Connect with MSSQL |
+|         |         | Add GraphiQL IDE |
+|         |         | Add example models |
+|         |         | Use Sequalize ORM |
+|         |         | Central Config file |
+|         | Single User Table Schema  |   |
+| Forecasts Schema |         |       |
+| Service Authentication |         |       |
+| Automatic Model Config |         |       |
+| Logging |         |       |
+| Documentation |         |       |
+| Process Runner/Cluster |         |       |
+| Deployment Instructions |         |       |
+| Standard Transaction Schema|         |       |
+| Tradeflows Schema |         |       |
+| Rates Schema |         |       |
+| ??? |         |       | |
 
 ...
