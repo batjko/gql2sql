@@ -1,9 +1,23 @@
 # GQL2SQL API Service
 
-> Under Development!
+> Under Development!!!
 
 This node application, once completed, will serve as an API service in front of our main SQL database (mainly for Findur data).
 It can be used by any other applications or processes to interact with the Findur database without having to write complex SQL queries over unknown Findur-specific tables.
+
+## Installation / Development
+
+Pre-requisites:
+
+* Install Git
+* Install Node.js
+* Install Babel
+
+1. Clone this repo
+2. Install dependencies: `npm install`
+3. Run the service: `babel-node server.js`
+
+Feel free to submit pull requests for enhancements. There is lots to do!
 
 ## Abstraction
 
