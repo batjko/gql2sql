@@ -100,39 +100,52 @@ const Query = new GraphQLObjectType({
   }
 });
 
-// const Mutation = new GraphQLObjectType({
-//   name: 'Mutation',
-//   description: 'Functions to create stuff',
-//   fields (){
-//     return {
-//       addforecast: {
-//         type: forecast,
-//         args: {
-//           firstName: {
-//             type: new GraphQLNonNull(GraphQLString)
-//           },
-//           lastName: {
-//             type: new GraphQLNonNull(GraphQLString)
-//           },
-//           email: {
-//             type: new GraphQLNonNull(GraphQLString)
-//           }
-//         },
-//         resolve(_,args){
-//           return Db.models.forecast.create({
-//             firstName: args.firstName,
-//             lastName: args.lastName,
-//             email: args.email.toLowerCase()
-//           });
-//         }
-//       }
-//     }
-//   }
-// });
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  description: 'Functions to create stuff',
+  fields (){
+    return {
+      addForecast: {
+        type: ForecastType,
+        description: 'Insert a new Forecast into the User table.',
+        args: {
+          bunit: {
+            type: new GraphQLNonNull(GraphQLString)
+          },
+          season: {
+            type: new GraphQLNonNull(GraphQLString)
+          },
+          currency: {
+            type: new GraphQLNonNull(GraphQLString)
+          },
+          position: {
+            type: new GraphQLNonNull(GraphQLFloat)
+          },
+          settle_date: {
+            type: new GraphQLNonNull(GraphQLString)
+          },
+          reference: {
+            type: GraphQLString
+          }
+        },
+        resolve(_,args){
+          return Forecast.create({
+            bunit: args.bunit,
+            season: args.season,
+            position: args.position,
+            currency: args.currency,
+            settle_date: new Date(args.settle_date),
+            reference: args.reference
+          });
+        } // resolve
+      } // addForecast
+    } // return
+  } // fields
+}); // Mutation
 
 const Schema = new GraphQLSchema({
-  query: Query
-  // mutation: Mutation
+  query: Query,
+  mutation: Mutation
 });
 
 export default Schema;
