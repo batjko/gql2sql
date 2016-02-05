@@ -1,7 +1,8 @@
 import Express from 'express';
 import GraphHTTP from 'express-graphql';
-import Schema from './schema';
 import config from './config'
+import Conn from './db';
+import Schema from './schema';
 
 // config
 const APP_PORT = config.sqldb.port;
@@ -13,8 +14,6 @@ app.use('/graphql', GraphHTTP({
   pretty: true,
   graphiql: true
 }));
-
-
 
 app.listen(APP_PORT, () => {
   console.log(`Listening on port ${APP_PORT}...`);
