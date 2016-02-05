@@ -42,7 +42,7 @@ const ForecastType = new GraphQLObjectType({
       currency: {
         type: GraphQLString,
         resolve(forecast){
-          return forecast.getPosts();
+          return forecast.currency;
         }
       },
       settle_date: {
