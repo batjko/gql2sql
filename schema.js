@@ -109,24 +109,12 @@ const Mutation = new GraphQLObjectType({
         type: ForecastType,
         description: 'Insert a new Forecast into the User table.',
         args: {
-          bunit: {
-            type: new GraphQLNonNull(GraphQLString)
-          },
-          season: {
-            type: new GraphQLNonNull(GraphQLString)
-          },
-          currency: {
-            type: new GraphQLNonNull(GraphQLString)
-          },
-          position: {
-            type: new GraphQLNonNull(GraphQLFloat)
-          },
-          settle_date: {
-            type: new GraphQLNonNull(GraphQLString)
-          },
-          reference: {
-            type: GraphQLString
-          }
+          bunit: {type: new GraphQLNonNull(GraphQLString)},
+          season: {type: new GraphQLNonNull(GraphQLString)},
+          currency: {type: new GraphQLNonNull(GraphQLString)},
+          position: {type: new GraphQLNonNull(GraphQLFloat)},
+          settle_date: {type: new GraphQLNonNull(GraphQLString)},
+          reference: {type: GraphQLString}
         },
         resolve(_,args){
           return Forecast.create({
