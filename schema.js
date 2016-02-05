@@ -15,12 +15,12 @@ const ForecastType = new GraphQLObjectType({
   description: 'This represents a forecast',
   fields: () => {
     return {
-      // id: {
-      //   type: GraphQLInt,
-      //   resolve(forecast) {
-      //     return forecast.id;
-      //   }
-      // },
+      id: {
+        type: GraphQLInt,
+        resolve(forecast) {
+          return forecast.id;
+        }
+      },
       bunit: {
         type: GraphQLString,
         resolve(forecast){
@@ -63,12 +63,19 @@ const ForecastType = new GraphQLObjectType({
           return forecast.status;
         }
       },
-      last_updated: {
+      updatedAt: {
         type: GraphQLString,
         resolve(forecast){
-          return forecast.last_updated.toString();
+          return forecast.updatedAt.toString();
+        }
+      },
+      createdAt: {
+        type: GraphQLString,
+        resolve(forecast){
+          return forecast.createdAt.toString();
         }
       }
+
     };
   }
 });
@@ -86,7 +93,7 @@ const Query = new GraphQLObjectType({
           }
         },
         resolve(root, args) {
-          return Db.models.Forecast.findAll({where: args});
+          return Forecast.findAll({where: args});
         }
       }
     }

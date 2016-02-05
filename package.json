@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "babel-node server.js",
+    "babel-node": "babel-node",
+    "start": "nodemon --exec npm run babel-node -- server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
