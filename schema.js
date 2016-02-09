@@ -90,6 +90,24 @@ const Query = new GraphQLObjectType({
         args: {
           id: {
             type: GraphQLInt
+          },
+          bunit: {
+            type: GraphQLString
+          },
+          season: {
+            type: GraphQLString
+          },
+          currency: {
+            type: GraphQLString
+          },
+          settle_date: {
+            type: GraphQLString
+          },
+          reference: {
+            type: GraphQLString
+          },
+          status: {
+            type: GraphQLString
           }
         },
         resolve(root, args) {
