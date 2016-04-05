@@ -27,9 +27,8 @@ const Forecast = Conn.define('USER_TSP_Forecasts', {
     allowNull: true
   },
   status: {
-    type:   Sequelize.ENUM,
-    values: ['PENDING', 'LOADED', 'UPDATED', 'MATURED', 'ERROR'],
-    defaultValue: 'PENDING'
+    type:   Sequelize.STRING,
+    defaultValue: 'New'
   }
 });
 
@@ -46,8 +45,5 @@ const Forecast = Conn.define('USER_TSP_Forecasts', {
 // }).catch(err => {
 //   console.error(err);
 // });
-
-
-
 
 export default Forecast;

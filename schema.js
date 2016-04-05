@@ -147,7 +147,34 @@ const Mutation = new GraphQLObjectType({
             reference: args.reference
           });
         } // resolve
-      } // addForecast
+      }, // addForecast
+
+      updateForecast: {
+        type: ForecastType,
+        description: 'Update an existing Forecast in the User table.',
+        args: {
+          id: {type: new GraphQLNonNull(GraphQLInt)},
+          bunit: {type: GraphQLString},
+          season: {type: GraphQLString},
+          currency: {type: GraphQLString},
+          position: {type: GraphQLFloat},
+          settle_date: {type: GraphQLString},
+          reference: {type: GraphQLString},
+          status: {type: GraphQLString}
+        },
+        resolve(_,args){
+          return Forecast.update({
+            bunit: args.bunit,
+            season: args.season,
+            position: args.position,
+            currency: args.currency,
+            settle_date: new Date(args.settle_date),
+            reference: args.reference,
+            status: args.status
+          }, {where: {id: args.id}});
+        } // resolve
+      } // updateForecast
+
     } // return
   } // fields
 }); // Mutation
