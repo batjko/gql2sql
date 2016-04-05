@@ -4,23 +4,23 @@ import Sequelize from 'Sequelize';
 const Forecast = Conn.define('USER_TSP_Forecasts', {
   bunit: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   season: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   position: {
     type: Sequelize.FLOAT,
-    allowNull: false
+    allowNull: true
   },
   currency: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   settle_date: {
     type: Sequelize.DATE,
-    allowNull: false
+    allowNull: true
   },
   reference: {
     type: Sequelize.STRING,

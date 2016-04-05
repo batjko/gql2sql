@@ -174,21 +174,12 @@ const Mutation = new GraphQLObjectType({
           mongo_id: {type: new GraphQLNonNull(GraphQLString)}
         },
         resolve(_,args){
+          const search= { mongo_id: args.mongo_id };
+          const retvals = Forecast.update(args,
+            {where: search }
+          );
 
-          const retvals = Forecast.update({
-              bunit: args.bunit,
-              season: args.season,
-              position: args.position,
-              currency: args.currency,
-              settle_date: new Date(args.settle_date),
-              reference: args.reference,
-              status: args.status,
-              mongo_id: args.mongo_id
-            },
-            {where: {mongo_id: args.mongo_id}
-          });
-
-          return Forecast.findOne({mongo_id: args.mongo_id});
+          return Forecast.findOne(search);
         } // resolve
       } // updateForecast
 
