@@ -34,7 +34,7 @@ const ForecastType = new GraphQLObjectType({
         }
       },
       position: {
-        type: GraphQLFloat ,
+        type: GraphQLFloat,
         resolve(forecast){
           return forecast.position;
         }
@@ -99,6 +99,9 @@ const Query = new GraphQLObjectType({
           },
           currency: {
             type: GraphQLString
+          },
+          position: {
+            type: GraphQLFloat
           },
           settle_date: {
             type: GraphQLString
