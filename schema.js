@@ -63,6 +63,12 @@ const ForecastType = new GraphQLObjectType({
           return forecast.status;
         }
       },
+      mongo_id: {
+        type: GraphQLString,
+        resolve(forecast){
+          return forecast.mongo_id;
+        }
+      },
       updatedAt: {
         type: GraphQLString,
         resolve(forecast){
@@ -111,6 +117,9 @@ const Query = new GraphQLObjectType({
           },
           status: {
             type: GraphQLString
+          },
+          mongo_id: {
+            type: GraphQLString
           }
         },
         resolve(root, args) {
@@ -135,7 +144,8 @@ const Mutation = new GraphQLObjectType({
           currency: {type: new GraphQLNonNull(GraphQLString)},
           position: {type: new GraphQLNonNull(GraphQLFloat)},
           settle_date: {type: new GraphQLNonNull(GraphQLString)},
-          reference: {type: GraphQLString}
+          reference: {type: GraphQLString},
+          mongo_id: {type: new GraphQLNonNull(GraphQLString)}
         },
         resolve(_,args){
           return Forecast.create({
@@ -144,7 +154,8 @@ const Mutation = new GraphQLObjectType({
             position: args.position,
             currency: args.currency,
             settle_date: new Date(args.settle_date),
-            reference: args.reference
+            reference: args.reference,
+            mongo_id: args.mongo_id
           });
         } // resolve
       }, // addForecast
@@ -153,28 +164,31 @@ const Mutation = new GraphQLObjectType({
         type: ForecastType,
         description: 'Update an existing Forecast in the User table.',
         args: {
-          id: {type: new GraphQLNonNull(GraphQLInt)},
           bunit: {type: GraphQLString},
           season: {type: GraphQLString},
           currency: {type: GraphQLString},
           position: {type: GraphQLFloat},
           settle_date: {type: GraphQLString},
           reference: {type: GraphQLString},
-          status: {type: GraphQLString}
+          status: {type: GraphQLString},
+          mongo_id: {type: new GraphQLNonNull(GraphQLString)}
         },
         resolve(_,args){
 
           const retvals = Forecast.update({
-            bunit: args.bunit,
-            season: args.season,
-            position: args.position,
-            currency: args.currency,
-            settle_date: new Date(args.settle_date),
-            reference: args.reference,
-            status: args.status
-          }, {where: {id: args.id}});
+              bunit: args.bunit,
+              season: args.season,
+              position: args.position,
+              currency: args.currency,
+              settle_date: new Date(args.settle_date),
+              reference: args.reference,
+              status: args.status,
+              mongo_id: args.mongo_id
+            },
+            {where: {mongo_id: args.mongo_id}
+          });
 
-          return Forecast.find({where: {id: args.id}});;
+          return Forecast.findOne({mongo_id: args.mongo_id});
         } // resolve
       } // updateForecast
 
