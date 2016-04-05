@@ -164,6 +164,7 @@ const Mutation = new GraphQLObjectType({
         type: ForecastType,
         description: 'Update an existing Forecast in the User table.',
         args: {
+          int: {type: GraphQLInt},
           bunit: {type: GraphQLString},
           season: {type: GraphQLString},
           currency: {type: GraphQLString},
@@ -174,7 +175,7 @@ const Mutation = new GraphQLObjectType({
           mongo_id: {type: new GraphQLNonNull(GraphQLString)}
         },
         resolve(_,args){
-          const search= { mongo_id: args.mongo_id };
+          const search= { $or: [{mongo_id: args.mongo_id}, {id: args.id}] };
           const retvals = Forecast.update(args,
             {where: search }
           );
