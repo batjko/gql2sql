@@ -163,7 +163,8 @@ const Mutation = new GraphQLObjectType({
           status: {type: GraphQLString}
         },
         resolve(_,args){
-          return Forecast.update({
+
+          const retvals = Forecast.update({
             bunit: args.bunit,
             season: args.season,
             position: args.position,
@@ -172,6 +173,8 @@ const Mutation = new GraphQLObjectType({
             reference: args.reference,
             status: args.status
           }, {where: {id: args.id}});
+
+          return Forecast.find({where: {id: args.id}});;
         } // resolve
       } // updateForecast
 
