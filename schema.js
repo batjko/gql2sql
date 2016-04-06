@@ -15,60 +15,20 @@ const ForecastType = new GraphQLObjectType({
   description: 'This represents a forecast',
   fields: () => {
     return {
-      id: {
-        type: GraphQLInt,
-        resolve(forecast) {
-          return forecast.id;
-        }
-      },
-      bunit: {
-        type: GraphQLString,
-        resolve(forecast){
-          return forecast.bunit;
-        }
-      },
-      season: {
-        type: GraphQLString,
-        resolve(forecast){
-          return forecast.season;
-        }
-      },
-      position: {
-        type: GraphQLFloat,
-        resolve(forecast){
-          return forecast.position;
-        }
-      },
-      currency: {
-        type: GraphQLString,
-        resolve(forecast){
-          return forecast.currency;
-        }
-      },
+      id: {type: GraphQLInt},
+      bunit: {type: GraphQLString},
+      season: {type: GraphQLString},
+      position: {type: GraphQLFloat},
+      currency: {type: GraphQLString},
       settle_date: {
         type: GraphQLString,
         resolve(forecast){
           return forecast.settle_date.toDateString();
         }
       },
-      reference: {
-        type: GraphQLString,
-        resolve(forecast){
-          return forecast.reference;
-        }
-      },
-      status: {
-        type: GraphQLString,
-        resolve(forecast){
-          return forecast.status;
-        }
-      },
-      mongo_id: {
-        type: GraphQLString,
-        resolve(forecast){
-          return forecast.mongo_id;
-        }
-      },
+      reference: {type: GraphQLString},
+      status: {type: GraphQLString},
+      mongo_id: {type: GraphQLString},
       updatedAt: {
         type: GraphQLString,
         resolve(forecast){
@@ -94,33 +54,15 @@ const Query = new GraphQLObjectType({
       forecasts: {
         type: new GraphQLList(ForecastType),
         args: {
-          id: {
-            type: GraphQLInt
-          },
-          bunit: {
-            type: GraphQLString
-          },
-          season: {
-            type: GraphQLString
-          },
-          currency: {
-            type: GraphQLString
-          },
-          position: {
-            type: GraphQLFloat
-          },
-          settle_date: {
-            type: GraphQLString
-          },
-          reference: {
-            type: GraphQLString
-          },
-          status: {
-            type: GraphQLString
-          },
-          mongo_id: {
-            type: GraphQLString
-          }
+          id: {type: GraphQLInt},
+          bunit: {type: GraphQLString},
+          season: {type: GraphQLString},
+          currency: {type: GraphQLString},
+          position: {type: GraphQLFloat},
+          settle_date: {type: GraphQLString},
+          reference: {type: GraphQLString},
+          status: {type: GraphQLString},
+          mongo_id: {type: GraphQLString}
         },
         resolve(root, args) {
           return Forecast.findAll({where: args});
