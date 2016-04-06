@@ -132,7 +132,7 @@ const Query = new GraphQLObjectType({
 
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
-  description: 'Functions to create stuff',
+  description: 'Adding or Changing Forecasts in SQL',
   fields (){
     return {
       addForecast: {
@@ -161,10 +161,10 @@ const Mutation = new GraphQLObjectType({
       }, // addForecast
 
       updateForecast: {
-        type: ForecastType,
-        description: 'Update an existing Forecast in the User table.',
+        type: GraphQLInt,
+        description: 'Update an existing Forecast in the User table. Identify by either id or mongo_id!',
         args: {
-          int: {type: GraphQLInt},
+          id: {type: GraphQLInt},
           bunit: {type: GraphQLString},
           season: {type: GraphQLString},
           currency: {type: GraphQLString},
@@ -172,7 +172,7 @@ const Mutation = new GraphQLObjectType({
           settle_date: {type: GraphQLString},
           reference: {type: GraphQLString},
           status: {type: GraphQLString},
-          mongo_id: {type: new GraphQLNonNull(GraphQLString)}
+          mongo_id: {type: GraphQLString}
         },
         resolve(_,args){
           const search= { $or: [{mongo_id: args.mongo_id}, {id: args.id}] };
@@ -180,7 +180,7 @@ const Mutation = new GraphQLObjectType({
             {where: search }
           );
 
-          return Forecast.findOne(search);
+          return retvals[0];
         } // resolve
       } // updateForecast
 
