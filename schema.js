@@ -102,6 +102,27 @@ const Mutation = new GraphQLObjectType({
         } // resolve
       }, // addForecast
 
+      setMongoId: {
+        type: GraphQLInt,
+        description: 'Set the mongo_id of a forecast, using other fields as the identifier.',
+        args: {
+          id: {type: GraphQLInt},
+          bunit: {type: GraphQLString},
+          season: {type: GraphQLString},
+          currency: {type: GraphQLString},
+          position: {type: GraphQLFloat},
+          settle_date: {type: GraphQLString},
+          reference: {type: GraphQLString},
+          status: {type: GraphQLString},
+          mongo_id: {type: new GraphQLNonNull(GraphQLString)}
+        },
+        resolve(_,args) {
+          const mongo_id = args.mongo_id;
+          delete args.mongo_id;
+          return Forecast.update({mongo_id: mongo_id}, {where: args });
+        }
+      },
+
       updateForecast: {
         type: GraphQLInt,
         description: 'Update an existing Forecast in the User table. Identify by either id or mongo_id!',
