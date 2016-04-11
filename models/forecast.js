@@ -6,6 +6,14 @@ const Forecast = Conn.define('USER_TSP_Forecasts', {
     type: Sequelize.STRING,
     allowNull: true
   },
+  party_id: {
+    type: Sequelize.INTEGER,
+    allowNull: true
+  },
+  portfolio: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
   season: {
     type: Sequelize.STRING,
     allowNull: true

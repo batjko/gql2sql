@@ -18,6 +18,8 @@ const ForecastType = new GraphQLObjectType({
     return {
       id: {type: GraphQLInt},
       bunit: {type: GraphQLString},
+      party_id: {type: GraphQLInt},
+      portfolio: {type: GraphQLString},
       season: {type: GraphQLString},
       position: {type: GraphQLFloat},
       currency: {type: GraphQLString},
@@ -58,6 +60,8 @@ const Query = new GraphQLObjectType({
         args: {
           id: {type: GraphQLInt},
           bunit: {type: GraphQLString},
+          party_id: {type: GraphQLInt},
+          portfolio: {type: GraphQLString},
           season: {type: GraphQLString},
           currency: {type: GraphQLString},
           position: {type: GraphQLFloat},
@@ -91,6 +95,8 @@ const Mutation = new GraphQLObjectType({
         description: 'Insert a new Forecast into the User table.',
         args: {
           bunit: {type: new GraphQLNonNull(GraphQLString)},
+          party_id: {type: GraphQLInt},
+          portfolio: {type: GraphQLString},
           season: {type: new GraphQLNonNull(GraphQLString)},
           currency: {type: new GraphQLNonNull(GraphQLString)},
           position: {type: new GraphQLNonNull(GraphQLFloat)},
@@ -101,6 +107,8 @@ const Mutation = new GraphQLObjectType({
         resolve(_,args){
           return Forecast.create({
             bunit: args.bunit,
+            party_id: args.party_id || 0,
+            portfolio: args.portfolio || '',
             season: args.season,
             position: args.position,
             currency: args.currency,
@@ -118,6 +126,8 @@ const Mutation = new GraphQLObjectType({
         args: {
           id: {type: GraphQLInt},
           bunit: {type: GraphQLString},
+          party_id: {type: GraphQLInt},
+          portfolio: {type: GraphQLString},
           season: {type: GraphQLString},
           currency: {type: GraphQLString},
           position: {type: GraphQLFloat},
@@ -139,6 +149,8 @@ const Mutation = new GraphQLObjectType({
         args: {
           id: {type: GraphQLInt},
           bunit: {type: GraphQLString},
+          party_id: {type: GraphQLInt},
+          portfolio: {type: GraphQLString},
           season: {type: GraphQLString},
           currency: {type: GraphQLString},
           position: {type: GraphQLFloat},
