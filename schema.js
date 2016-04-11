@@ -96,7 +96,7 @@ const Mutation = new GraphQLObjectType({
           position: {type: new GraphQLNonNull(GraphQLFloat)},
           settle_date: {type: new GraphQLNonNull(GraphQLString)},
           reference: {type: GraphQLString},
-          mongo_id: {type: new GraphQLNonNull(GraphQLString)}
+          mongo_id: {type: new GraphQLNonNull(GraphQLString)},
         },
         resolve(_,args){
           return Forecast.create({
@@ -129,7 +129,7 @@ const Mutation = new GraphQLObjectType({
         resolve(_,args) {
           const mongo_id = args.mongo_id;
           delete args.mongo_id;
-          return Forecast.update({mongo_id: mongo_id}, {where: args });
+          return Forecast.update({mongo_id: mongo_id, hasChanged: 0}, {where: args });
         }
       },
 
@@ -148,6 +148,7 @@ const Mutation = new GraphQLObjectType({
           mongo_id: {type: GraphQLString}
         },
         resolve(_,args){
+          args.hasChanged = 0;
           const search= { $or: [{mongo_id: args.mongo_id}, {id: args.id}] };
           const retvals = Forecast.update(args,
             {where: search }
