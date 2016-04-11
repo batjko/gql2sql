@@ -3,6 +3,7 @@ import {
   GraphQLInt,
   GraphQLString,
   GraphQLFloat,
+  GraphQLBoolean,
   GraphQLList,
   GraphQLSchema,
   GraphQLNonNull
@@ -35,6 +36,7 @@ const ForecastType = new GraphQLObjectType({
           return forecast.updatedAt.toString();
         }
       },
+      hasChanged: {type: GraphQLBoolean},
       createdAt: {
         type: GraphQLString,
         resolve(forecast){
@@ -62,10 +64,22 @@ const Query = new GraphQLObjectType({
           settle_date: {type: GraphQLString},
           reference: {type: GraphQLString},
           status: {type: GraphQLString},
-          mongo_id: {type: GraphQLString}
+          mongo_id: {type: GraphQLString},
+          hasChanged: {type: GraphQLBoolean}
         },
         resolve(root, args) {
-          return Forecast.findAll({where: args});
+          const hasChanged = args.hasChanged;
+          delete args.hasChanged;
+
+          const opts = { where: args };
+          if (hasChanged){
+            opts.where.status = { ne: 'New' };
+          } else {
+            opts.where.status = 'New';
+          }
+          console.log(`FindAll Options:\n${JSON.stringify(opts)}`);
+
+          return Forecast.findAll(opts);
         }
       }
     }
@@ -97,7 +111,8 @@ const Mutation = new GraphQLObjectType({
             currency: args.currency,
             settle_date: new Date(args.settle_date),
             reference: args.reference,
-            mongo_id: args.mongo_id
+            mongo_id: args.mongo_id,
+            hasChanged: false
           });
         } // resolve
       }, // addForecast
