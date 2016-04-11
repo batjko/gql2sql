@@ -72,12 +72,7 @@ const Query = new GraphQLObjectType({
           delete args.hasChanged;
 
           const opts = { where: args };
-          if (hasChanged){
-            opts.where.status = { ne: 'New' };
-          } else {
-            opts.where.status = 'New';
-          }
-          console.log(`FindAll Options:\n${JSON.stringify(opts)}`);
+          opts.where.hasChanged = hasChanged ? 1 : 0;
 
           return Forecast.findAll(opts);
         }
@@ -112,7 +107,7 @@ const Mutation = new GraphQLObjectType({
             settle_date: new Date(args.settle_date),
             reference: args.reference,
             mongo_id: args.mongo_id,
-            hasChanged: false
+            hasChanged: 0
           });
         } // resolve
       }, // addForecast
