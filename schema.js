@@ -31,6 +31,7 @@ const ForecastType = new GraphQLObjectType({
       },
       reference: {type: GraphQLString},
       status: {type: GraphQLString},
+      tran_num: {type: GraphQLInt},
       mongo_id: {type: GraphQLString},
       updatedAt: {
         type: GraphQLString,
@@ -68,6 +69,7 @@ const Query = new GraphQLObjectType({
           settle_date: {type: GraphQLString},
           reference: {type: GraphQLString},
           status: {type: GraphQLString},
+          tran_num: {type: GraphQLInt},
           mongo_id: {type: GraphQLString},
           hasChanged: {type: GraphQLBoolean}
         },

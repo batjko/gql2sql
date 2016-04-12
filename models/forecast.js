@@ -42,6 +42,10 @@ const Forecast = Conn.define('USER_TSP_Forecasts', {
     type:   Sequelize.STRING,
     defaultValue: 'New'
   },
+  tran_num: {
+    type: Sequelize.INTEGER,
+    allowNull: true
+  },
   hasChanged: {
     type: Sequelize.INTEGER,
     optional: true
