@@ -1,9 +1,6 @@
 import {
   GraphQLObjectType,
-  GraphQLInt,
-  GraphQLString,
-  GraphQLFloat,
-  GraphQLNonNull
+  GraphQLInt
 } from 'graphql';
 
 import { ForecastModel, ForecastType, ForecastArgs } from './models/forecasts';
