@@ -14,12 +14,13 @@ export default new GraphQLObjectType({
         type: new GraphQLList(ForecastType),
         args: ForecastArgs,
         resolve(root, args) {
-          const hasChanged = args.hasChanged;
-          delete args.hasChanged;
-
           const opts = { where: args };
-          opts.where.hasChanged = hasChanged ? 1 : 0;
 
+          if (args.hasOwnProperty("hasChanged")) {
+            const hasChanged = args.hasChanged;
+            delete args.hasChanged;
+            opts.where.hasChanged = hasChanged ? 1 : 0;
+          }
           return ForecastModel.findAll(opts);
         }
       }
