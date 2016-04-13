@@ -6,7 +6,7 @@ import {
   GraphQLNonNull
 } from 'graphql';
 
-import { ForecastModel, ForecastType } from './models/forecasts';
+import { ForecastModel, ForecastType, ForecastArgs } from './models/forecasts';
 
 export default new GraphQLObjectType({
   name: 'Mutation',
@@ -16,17 +16,7 @@ export default new GraphQLObjectType({
       addForecast: {
         type: ForecastType,
         description: 'Insert a new Forecast into the User table.',
-        args: {
-          bunit: {type: new GraphQLNonNull(GraphQLString)},
-          party_id: {type: GraphQLInt},
-          portfolio: {type: GraphQLString},
-          season: {type: new GraphQLNonNull(GraphQLString)},
-          currency: {type: new GraphQLNonNull(GraphQLString)},
-          position: {type: new GraphQLNonNull(GraphQLFloat)},
-          settle_date: {type: new GraphQLNonNull(GraphQLString)},
-          reference: {type: GraphQLString},
-          mongo_id: {type: new GraphQLNonNull(GraphQLString)},
-        },
+        args: ForecastArgs,
         resolve(_,args){
           return ForecastModel.create({
             bunit: args.bunit,
@@ -46,19 +36,7 @@ export default new GraphQLObjectType({
       setMongoId: {
         type: GraphQLInt,
         description: 'Set the mongo_id of a forecast, using other fields as the identifier.',
-        args: {
-          id: {type: GraphQLInt},
-          bunit: {type: GraphQLString},
-          party_id: {type: GraphQLInt},
-          portfolio: {type: GraphQLString},
-          season: {type: GraphQLString},
-          currency: {type: GraphQLString},
-          position: {type: GraphQLFloat},
-          settle_date: {type: GraphQLString},
-          reference: {type: GraphQLString},
-          status: {type: GraphQLString},
-          mongo_id: {type: new GraphQLNonNull(GraphQLString)}
-        },
+        args: ForecastArgs,
         resolve(_,args) {
           const mongo_id = args.mongo_id;
           delete args.mongo_id;
@@ -69,19 +47,7 @@ export default new GraphQLObjectType({
       updateForecast: {
         type: GraphQLInt,
         description: 'Update an existing Forecast in the User table. Identify by either id or mongo_id!',
-        args: {
-          id: {type: GraphQLInt},
-          bunit: {type: GraphQLString},
-          party_id: {type: GraphQLInt},
-          portfolio: {type: GraphQLString},
-          season: {type: GraphQLString},
-          currency: {type: GraphQLString},
-          position: {type: GraphQLFloat},
-          settle_date: {type: GraphQLString},
-          reference: {type: GraphQLString},
-          status: {type: GraphQLString},
-          mongo_id: {type: GraphQLString}
-        },
+        args: ForecastArgs,
         resolve(_,args){
           args.hasChanged = 0;
           const search= { $or: [{mongo_id: args.mongo_id}, {id: args.id}] };
