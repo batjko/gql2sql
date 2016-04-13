@@ -1,10 +1,10 @@
 import { GraphQLSchema } from 'graphql';
-import Db from './db';
-import { ForecastQuery, ForecastMutations } from './models/forecasts';
+import Query from './Query.js';
+import Mutation from './Mutation.js';
 
 const Schema = new GraphQLSchema({
-  query: ForecastQuery,
-  mutation: ForecastMutations
+  query: Query,
+  mutation: Mutation
 });
 
 export default Schema;

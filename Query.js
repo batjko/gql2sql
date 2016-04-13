@@ -6,8 +6,8 @@ import {
   GraphQLBoolean,
   GraphQLList
 } from 'graphql';
-import Forecast from './ForecastModel.js';
-import ForecastType from './ForecastType.js';
+
+import { ForecastModel, ForecastType } from './models/forecasts';
 
 export default new GraphQLObjectType({
   name: 'Query',
@@ -38,7 +38,7 @@ export default new GraphQLObjectType({
           const opts = { where: args };
           opts.where.hasChanged = hasChanged ? 1 : 0;
 
-          return Forecast.findAll(opts);
+          return ForecastModel.findAll(opts);
         }
       }
     }

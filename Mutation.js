@@ -5,8 +5,8 @@ import {
   GraphQLFloat,
   GraphQLNonNull
 } from 'graphql';
-import ForecastModel from './ForecastModel.js';
-import ForecastType from './ForecastType.js';
+
+import { ForecastModel, ForecastType } from './models/forecasts';
 
 export default new GraphQLObjectType({
   name: 'Mutation',

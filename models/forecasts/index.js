@@ -1,7 +1,7 @@
-import ForecastQuery from './ForecastQuery.js';
-import ForecastMutations from './ForecastMutations.js';
+import ForecastModel from './ForecastModel.js';
+import ForecastType from './ForecastType.js';
 
 module.exports = {
-  ForecastQuery,
-  ForecastMutations
+  ForecastModel,
+  ForecastType
 };
