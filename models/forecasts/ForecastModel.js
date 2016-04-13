@@ -1,7 +1,7 @@
-import Conn from '../db';
+import Conn from '../../db';
 import Sequelize from 'Sequelize';
 
-const Forecast = Conn.define('USER_TSP_Forecasts', {
+const ForecastModel = Conn.define('USER_TSP_Forecasts', {
   bunit: {
     type: Sequelize.STRING,
     allowNull: true
@@ -52,4 +52,4 @@ const Forecast = Conn.define('USER_TSP_Forecasts', {
   }
 });
 
-export default Forecast;
+export default ForecastModel;
