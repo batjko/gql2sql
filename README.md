@@ -51,6 +51,7 @@ Using GraphQL, the API Service is also secure from SQL Injection, as no direct S
 | Service Authentication |         |       |
 | Automatic Model Config |         |       |
 | Logging |         |       |
+| Add Unit Testing | | |
 |  | Documentation |       |
 |  | | Process Runner/Cluster |
 |  | Deployment Instructions  |       |

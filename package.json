@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "babel-node": "babel-node",
+    "clean": "RD /S /Q build && mkdir build",
     "start": "nodemon --exec npm run babel-node -- server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,10 +30,8 @@
     }
   },
   "dependencies": {
-    "babel-preset-node5": "^10.1.1",
     "express": "^4.13.3",
     "express-graphql": "^0.4.5",
-    "faker": "^3.0.1",
     "graphiql": "^0.4.5",
     "graphql": "^0.4.14",
     "lodash": "^3.10.1",
