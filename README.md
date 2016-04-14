@@ -9,10 +9,10 @@ It can be used by any other applications or processes to interact with the Findu
 
 **Prerequisites:**
 
-* Install Git
-* Install Node.js
-* Install Nodemon
-* Install Babel
+* Install [Git](https://git-scm.com/)
+* Install [Node.js](https://nodejs.org/en/)
+* Install [Nodemon](http://nodemon.io/)
+* Install [Babel](https://babeljs.io/docs/usage/cli/)
 
 **Installation:**
 
@@ -32,10 +32,10 @@ However, other models can easily be added to expose more data points from the Fi
 
 ## GraphQL and Sequelize
 
-GraphQL is used as an efficient *abstraction layer* to read from or write to the MSSQL database, based on pre-defined data *schemas*. You retrieve only what you query for, parameterized and fast.
+GraphQL is used as an efficient *abstraction layer* to read from or write to the MSSQL database, based on pre-defined data *schemas*. Unlike with REST APIs, with GraphQL you retrieve only what you query for, parameterized and fast.
 The response is always valid JSON, which makes working with the returned data very easy in most languages.
 
-Behind the scenes, the SQL endpoints are managed by the **Sequelize** ORM, in order to abstract away from manually constructed SQL statements. Sequelize takes care of security, data type validations and transaction management when accessing the SQL back-end.
+Behind the scenes, the SQL endpoints are managed by the [**Sequelize** ORM](http://docs.sequelizejs.com/), in order to abstract away from manually constructed SQL statements. Sequelize takes care of security, data type validations and transaction management when accessing the SQL back-end.
 
 Using GraphQL, the API Service is also secure from SQL Injection, as no direct SQL will be used by the clients making API calls.
 
