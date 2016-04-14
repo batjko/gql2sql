@@ -11,31 +11,33 @@ It can be used by any other applications or processes to interact with the Findu
 
 * Install Git
 * Install Node.js
+* Install Nodemon
 * Install Babel
 
 **Installation:**
 
 1. Clone this repo
 2. Install dependencies: `npm install`
-3. Run the service: `babel-node server.js`
+3. Run the service: `npm start`
 
 Feel free to submit pull requests for enhancements. There is lots to do!
 
 ## Schema / Models
 
-Currently only two basic example models exist to have something to start development with:
+Currently only one model has been implemented: Hedge Accounting Forecasts.
+However, other models can easily be added to expose more data points from the Findur DB.
 
-* People
-* Posts
 
 ![screenshot](./Assets/images/graphiql_screenshot.png)
 
-## Abstraction
+## GraphQL and Sequelize
 
-GraphQL is used as an efficient abstraction layer to read from or write to the MSSQL database, based on pre-defined SQL definitions.
-Whether an API endpoint represents a single small reference table, or a large number of tables, modelled by complex SQL constructs... the GraphQL access will remain both simple and efficient.
+GraphQL is used as an efficient *abstraction layer* to read from or write to the MSSQL database, based on pre-defined data *schemas*. You retrieve only what you query for, parameterized and fast.
+The response is always valid JSON, which makes working with the returned data very easy in most languages.
 
-It is also secure from SQL Injection, as no direct SQL will be used by the clients connecting via this service.
+Behind the scenes, the SQL endpoints are managed by the **Sequelize** ORM, in order to abstract away from manually constructed SQL statements. Sequelize takes care of security, data type validations and transaction management when accessing the SQL back-end.
+
+Using GraphQL, the API Service is also secure from SQL Injection, as no direct SQL will be used by the clients making API calls.
 
 ## TODOs
 
@@ -43,18 +45,16 @@ It is also secure from SQL Injection, as no direct SQL will be used by the clien
 | --------|---------|-------|
 |         |         | Connect with MSSQL |
 |         |         | Add GraphiQL IDE |
-|         |         | Add example models |
 |         |         | Use Sequalize ORM |
 |         |         | Central Config file |
-|         | Single User Table Schema  |   |
-| Forecasts Schema |         |       |
+|         |         | Forecasts Schema |
 | Service Authentication |         |       |
 | Automatic Model Config |         |       |
 | Logging |         |       |
-| Documentation |         |       |
-| Process Runner/Cluster |         |       |
-| Deployment Instructions |         |       |
-| Standard Transaction Schema|         |       |
+|  | Documentation |       |
+|  | | Process Runner/Cluster |
+|  | Deployment Instructions  |       |
+| Standard Transaction Schema |         |       |
 | Tradeflows Schema |         |       |
 | Rates Schema |         |       |
 | ??? |         |       | |
