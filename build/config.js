@@ -10,6 +10,12 @@ var config = {
     "database": "FINDUR_PM",
     "username": "meteor_user",
     "password": "meteor"
+  },
+  "winston": {
+    token: "f12243fb-a035-4a23-8287-d55bc7bef7d0",
+    subdomain: "tuitreasury",
+    tags: ["GQL2SQL", "API"],
+    json: true
   }
 };
 
