@@ -18,6 +18,8 @@ var _logger2 = _interopRequireDefault(_logger);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var infoLogger = _logger2.default.info;
+
 var sqldb = _config2.default.sqldb;
 var Conn = new _Sequelize2.default(sqldb.database, sqldb.username, sqldb.password, {
   host: sqldb.server,
@@ -27,7 +29,7 @@ var Conn = new _Sequelize2.default(sqldb.database, sqldb.username, sqldb.passwor
     min: 0,
     idle: 10000
   },
-  logging: _logger2.default
+  logging: infoLogger
 });
 
 exports.default = Conn;

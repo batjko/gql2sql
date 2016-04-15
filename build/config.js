@@ -15,6 +15,7 @@ var config = {
     token: "f12243fb-a035-4a23-8287-d55bc7bef7d0",
     subdomain: "tuitreasury",
     tags: ["GQL2SQL", "API"],
+    handleExceptions: true,
     json: true
   }
 };
