@@ -26,18 +26,6 @@ var _schema2 = _interopRequireDefault(_schema);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// set up logger
-// import winston from 'winston';
-// require('winston-loggly');
-//
-// const log = new (winston.Logger)({
-//   transports: [
-//     new (winston.transports.Console)(),
-//     new (winston.transports.File)({ filename: 'somefile.log' })
-//   ]
-// });
-// winston.add(winston.transports.Loggly, config.winston);
-
 // config
 var APP_PORT = _config2.default.sqldb.port;
 
@@ -50,7 +38,6 @@ app.use('/graphql', (0, _expressGraphql2.default)({
 }));
 
 app.listen(APP_PORT, function () {
-  _logger2.default.info('API Service started with log module.');
-  console.log('Listening on port ' + APP_PORT + '...');
+  _logger2.default.info('API Service started', { port: APP_PORT });
 });
 //# sourceMappingURL=server.js.map

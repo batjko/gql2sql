@@ -37,7 +37,7 @@ export default new GraphQLObjectType({
         resolve(_,args) {
           const mongo_id = args.mongo_id;
           delete args.mongo_id;
-          return ForecastModel.update({mongo_id: mongo_id, hasChanged: 0}, {where: args });
+          return ForecastModel.update({ mongo_id: mongo_id, hasChanged: 0 }, { where: args });
         }
       },
 
@@ -47,9 +47,9 @@ export default new GraphQLObjectType({
         args: ForecastArgs,
         resolve(_,args){
           args.hasChanged = 0;
-          const search= { $or: [{mongo_id: args.mongo_id}, {id: args.id}] };
+          const search= { $or: [{ mongo_id: args.mongo_id }, { id: args.id }] };
           const retvals = ForecastModel.update(args,
-            {where: search }
+            { where: search }
           );
 
           return retvals[0];

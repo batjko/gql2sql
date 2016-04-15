@@ -4,15 +4,18 @@ require('winston-loggly');
 
 winston.emitErrs = true;
 
-export default logger = new winston.Logger({
-    transports: [
-        new winston.transports.Loggly(config.winston),
-        new winston.transports.Console({
-            level: 'debug',
-            handleExceptions: true,
-            json: false,
-            colorize: true
-        })
-    ],
-    exitOnError: false
+const logger = new winston.Logger({
+  transports: [
+    new winston.transports.Loggly(config.winston),
+    new winston.transports.Console({
+      level: 'debug',
+      json: false,
+      handleExceptions: true,
+      humanReadableUnhandledException: true,
+      colorize: true
+    })
+  ],
+  exitOnError: false
 });
+
+export default logger;

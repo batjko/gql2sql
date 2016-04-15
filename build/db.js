@@ -12,6 +12,10 @@ var _Sequelize = require('Sequelize');
 
 var _Sequelize2 = _interopRequireDefault(_Sequelize);
 
+var _logger = require('./logger');
+
+var _logger2 = _interopRequireDefault(_logger);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var sqldb = _config2.default.sqldb;
@@ -23,7 +27,7 @@ var Conn = new _Sequelize2.default(sqldb.database, sqldb.username, sqldb.passwor
     min: 0,
     idle: 10000
   },
-  logging: console.log
+  logging: _logger2.default
 });
 
 exports.default = Conn;

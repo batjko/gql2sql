@@ -17,6 +17,5 @@ app.use('/graphql', GraphHTTP({
 }));
 
 app.listen(APP_PORT, () => {
-  log.info('API Service started with log module.');
-  console.log(`Listening on port ${APP_PORT}...`);
+  log.info('API Service started', { port: APP_PORT });
 })
