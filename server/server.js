@@ -2,7 +2,6 @@ import Express from 'express';
 import GraphHTTP from 'express-graphql';
 import config from './config'
 import log from './logger';
-import Conn from './db';
 import Schema from './schema';
 
 // config
