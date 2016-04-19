@@ -1,7 +1,7 @@
 import Express from 'express';
 import GraphHTTP from 'express-graphql';
 import config from './config'
-import Conn from './db';
+import log from './logger';
 import Schema from './schema';
 
 // config
@@ -16,5 +16,5 @@ app.use('/graphql', GraphHTTP({
 }));
 
 app.listen(APP_PORT, () => {
-  console.log(`Listening on port ${APP_PORT}...`);
+  log.info('API Service started', { port: APP_PORT });
 })

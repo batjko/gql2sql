@@ -1,5 +1,8 @@
 import config from './config'
 import Sequelize from 'Sequelize';
+import log from './logger';
+
+const infoLogger = log.info;
 
 const sqldb = config.sqldb;
 const Conn = new Sequelize(sqldb.database, sqldb.username, sqldb.password, {
@@ -10,7 +13,7 @@ const Conn = new Sequelize(sqldb.database, sqldb.username, sqldb.password, {
     min: 0,
     idle: 10000
   },
-  logging: console.log
+  logging: infoLogger
 });
 
 export default Conn;

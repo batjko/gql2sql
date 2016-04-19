@@ -1,21 +1,24 @@
-import {
-  GraphQLObjectType,
-  GraphQLInt
-} from 'graphql';
+'use strict';
 
-import { ForecastModel, ForecastType, ForecastArgs } from './models/forecasts';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-export default new GraphQLObjectType({
+var _graphql = require('graphql');
+
+var _forecasts = require('./models/forecasts');
+
+exports.default = new _graphql.GraphQLObjectType({
   name: 'Mutation',
   description: 'Adding or Changing Forecasts in SQL',
-  fields (){
+  fields: function fields() {
     return {
       addForecast: {
-        type: ForecastType,
+        type: _forecasts.ForecastType,
         description: 'Insert a new Forecast into the User table.',
-        args: ForecastArgs,
-        resolve(_,args){
-          return ForecastModel.create({
+        args: _forecasts.ForecastArgs,
+        resolve: function resolve(_, args) {
+          return _forecasts.ForecastModel.create({
             bunit: args.bunit,
             party_id: args.party_id || 0,
             portfolio: args.portfolio || '',
@@ -28,34 +31,36 @@ export default new GraphQLObjectType({
             hasChanged: 0
           });
         } // resolve
+
       }, // addForecast
 
       setMongoId: {
-        type: GraphQLInt,
+        type: _graphql.GraphQLInt,
         description: 'Set the mongo_id of a forecast, using other fields as the identifier.',
-        args: ForecastArgs,
-        resolve(_,args) {
-          const mongo_id = args.mongo_id;
+        args: _forecasts.ForecastArgs,
+        resolve: function resolve(_, args) {
+          var mongo_id = args.mongo_id;
           delete args.mongo_id;
-          return ForecastModel.update({mongo_id: mongo_id, hasChanged: 0}, {where: args });
+          return _forecasts.ForecastModel.update({ mongo_id: mongo_id, hasChanged: 0 }, { where: args });
         }
       },
 
       updateForecast: {
-        type: GraphQLInt,
+        type: _graphql.GraphQLInt,
         description: 'Update an existing Forecast in the User table. Identify by either id or mongo_id!',
-        args: ForecastArgs,
-        resolve(_,args){
+        args: _forecasts.ForecastArgs,
+        resolve: function resolve(_, args) {
           args.hasChanged = 0;
-          const search= { $or: [{mongo_id: args.mongo_id}, {id: args.id}] };
-          const retvals = ForecastModel.update(args,
-            {where: search }
-          );
+          var search = { $or: [{ mongo_id: args.mongo_id }, { id: args.id }] };
+          var retvals = _forecasts.ForecastModel.update(args, { where: search });
 
           return retvals[0];
         } // resolve
+
       } // updateForecast
 
-    } // return
+    }; // return
   } // fields
+
 }); // Mutation
+//# sourceMappingURL=Mutation.js.map
