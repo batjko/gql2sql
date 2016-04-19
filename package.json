@@ -4,11 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "clean": "RD /S /Q build && mkdir build",
+    "clean": "IF EXIST build RD /S /Q build && mkdir build",
     "babel-node": "babel-node",
     "build-server": "babel -d ./build ./server -s",
     "build": "npm run clean && npm run test && npm run build-server",
-    "start": "nodemon --exec npm run build && babel-node -- build/server.js",
+    "start": "npm run build && node -- build/server.js",
     "test": "mocha --compilers js:babel-register"
   },
   "author": "",
