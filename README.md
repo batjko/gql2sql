@@ -1,9 +1,11 @@
 # GQL2SQL API Service
 
-> Under Development!!!
+This node application, serves as example of a GraphQL API service in front of a legacy SQL database.
+It shows usage of Sequelize to interact with a MSSQL database (never need to write a single SQL command), and some tooling like:
 
-This node application, once completed, will serve as an API service in front of our main SQL database (mainly for Findur data).
-It can be used by any other applications or processes to interact with the Findur database without having to write complex SQL queries over unknown Findur-specific tables.
+* Babel (full ES6, incl. imports for example)
+* Logging with Winston (console and Loggly)
+* Testing with Mocha and Chai
 
 ## Installation / Development
 
@@ -20,13 +22,11 @@ It can be used by any other applications or processes to interact with the Findu
 2. Install dependencies: `npm install`
 3. Run the service: `npm start`
 
-Feel free to submit pull requests for enhancements. There is lots to do!
+Feel free to submit pull requests for enhancements!
 
 ## Schema / Models
 
-Currently only one model has been implemented: Hedge Accounting Forecasts.
-However, other models can easily be added to expose more data points from the Findur DB.
-
+Currently only a generic model of "Items" has been implemented. It can serve as a guide to add more models to expose (both in Sequelize and GraphQL).
 
 ![screenshot](./server/Assets/images/graphiql_screenshot.png)
 
@@ -37,7 +37,7 @@ The response is always valid JSON, which makes working with the returned data ve
 
 Behind the scenes, the SQL endpoints are managed by the [**Sequelize** ORM](http://docs.sequelizejs.com/), in order to abstract away from manually constructed SQL statements. Sequelize takes care of security, data type validations and transaction management when accessing the SQL back-end.
 
-Using GraphQL, the API Service is also secure from SQL Injection, as no direct SQL will be used by the clients making API calls.
+Btw, using the combination of GraphQL with a SQL ORM, the API Service is also secure from SQL Injection, which is neat.
 
 ## TODOs
 
@@ -52,6 +52,6 @@ Using GraphQL, the API Service is also secure from SQL Injection, as no direct S
 | |         | Logging (Winston -> Loggly)|
 |  | | Test examples |
 |  | | Process Runner/Cluster |
-| ??? |         |       | |
+| Change to Apollo Tools |         |       | |
 
 ...
