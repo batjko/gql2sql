@@ -15,6 +15,10 @@ It shows usage of Sequelize to interact with a MSSQL database (never need to wri
 * [Git](https://git-scm.com/)
 * [Node.js](https://nodejs.org/en/)
 * [Babel](https://babeljs.io/docs/usage/cli/)
+* MSSQL (with an Items table as described in `models/items/ItemModel.js`)
+
+Of course you can also implement your own Model by using the 'modules/items' folder as a guide. Once you have your own module folder, you will need to add the appropriate GraphQL resolve functions to the `Query.js` and `Mutation.js` files as well.
+Remember, this repo is meant as a guiding example, putting together a bunch of tools that you may want to make use of.
 
 **Installation:**
 
