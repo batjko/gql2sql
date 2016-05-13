@@ -28,7 +28,7 @@ Currently only one model has been implemented: Hedge Accounting Forecasts.
 However, other models can easily be added to expose more data points from the Findur DB.
 
 
-![screenshot](./Assets/images/graphiql_screenshot.png)
+![screenshot](./server/Assets/images/graphiql_screenshot.png)
 
 ## GraphQL and Sequelize
 
@@ -46,10 +46,9 @@ Using GraphQL, the API Service is also secure from SQL Injection, as no direct S
 |         |         | Connect with MSSQL |
 |         |         | Add GraphiQL IDE |
 |         |         | Use Sequalize ORM |
-|         |         | Central Config file |
-|         |         | Forecasts Schema |
+|         |         | Central Configuration |
+|         |         | Items Schema |
 | Service Authentication |         |       |
-| Automatic Model Config |         |       |
 | |         | Logging |
 | Add Unit Testing | | |
 |  | Documentation |       |
