@@ -7,7 +7,7 @@ const infoLogger = log.info;
 const sqldb = config.sqldb;
 const Conn = new Sequelize(sqldb.database, sqldb.username, sqldb.password, {
   host: sqldb.server,
-  dialect: 'mssql',
+  dialect: sqldb.dialect,
   pool: {
     max: 5,
     min: 0,

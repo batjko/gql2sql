@@ -5,7 +5,7 @@ import log from './logger';
 import Schema from './schema';
 
 // config
-const APP_PORT = config.sqldb.port;
+const APP_PORT = config.port;
 
 const app = Express();
 

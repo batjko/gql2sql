@@ -1,11 +1,12 @@
 # GQL2SQL API Service
 
-This node application, serves as example of a GraphQL API service in front of a legacy SQL database.
+This simple node app serves as example of a GraphQL API service in front of a legacy SQL database.
 It shows usage of Sequelize to interact with a MSSQL database (never need to write a single SQL command), and some tooling like:
 
 * Babel (full ES6, incl. imports for example)
 * Logging with Winston (console and Loggly)
 * Testing with Mocha and Chai
+* Linting (ESLint)
 
 ## Installation / Development
 
@@ -23,6 +24,10 @@ It shows usage of Sequelize to interact with a MSSQL database (never need to wri
 3. Run the service: `npm start`
 
 Feel free to submit pull requests for enhancements!
+
+**Testing:**
+
+1. `npm test` will run any tests in the `test` folder
 
 ## Schema / Models
 

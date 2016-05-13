@@ -18,7 +18,7 @@ describe('Configuration', () => {
     });
 
     it('has all required keys', () => {
-      expect(config.sqldb).to.have.all.keys(['server', 'port', 'username', 'password', 'database']);
+      expect(config.sqldb).to.have.all.keys(['dialect', 'server', 'username', 'password', 'database', 'dialectOptions']);
     });
   });
 });
