@@ -49,14 +49,9 @@ Using GraphQL, the API Service is also secure from SQL Injection, as no direct S
 |         |         | Central Configuration |
 |         |         | Items Schema |
 | Service Authentication |         |       |
-| |         | Logging |
-| Add Unit Testing | | |
-|  | Documentation |       |
+| |         | Logging (Winston -> Loggly)|
+|  | | Test examples |
 |  | | Process Runner/Cluster |
-|  | Deployment Instructions  |       |
-| Standard Transaction Schema |         |       |
-| Tradeflows Schema |         |       |
-| Rates Schema |         |       |
 | ??? |         |       | |
 
 ...
