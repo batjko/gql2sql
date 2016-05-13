@@ -14,7 +14,6 @@ It shows usage of Sequelize to interact with a MSSQL database (never need to wri
 
 * Install [Git](https://git-scm.com/)
 * Install [Node.js](https://nodejs.org/en/)
-* Install [Nodemon](http://nodemon.io/)
 * Install [Babel](https://babeljs.io/docs/usage/cli/)
 
 **Installation:**
