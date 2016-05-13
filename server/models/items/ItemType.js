@@ -7,8 +7,8 @@ import {
 } from 'graphql';
 
 export default new GraphQLObjectType({
-  name: 'Forecast',
-  description: 'This represents a forecast',
+  name: 'Item',
+  description: 'This represents a item',
   fields: () => {
     return {
       id: {type: GraphQLInt},
@@ -20,25 +20,25 @@ export default new GraphQLObjectType({
       currency: {type: GraphQLString},
       settle_date: {
         type: GraphQLString,
-        resolve(forecast){
-          return forecast.settle_date.toDateString();
+        resolve(item){
+          return item.settle_date.toDateString();
         }
       },
       reference: {type: GraphQLString},
       status: {type: GraphQLString},
       tran_num: {type: GraphQLInt},
-      mongo_id: {type: GraphQLString},
+      custom_id: {type: GraphQLString},
       updatedAt: {
         type: GraphQLString,
-        resolve(forecast){
-          return forecast.updatedAt.toString();
+        resolve(item){
+          return item.updatedAt.toString();
         }
       },
       hasChanged: {type: GraphQLBoolean},
       createdAt: {
         type: GraphQLString,
-        resolve(forecast){
-          return forecast.createdAt.toString();
+        resolve(item){
+          return item.createdAt.toString();
         }
       }
 

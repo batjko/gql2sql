@@ -12,9 +12,9 @@ It shows usage of Sequelize to interact with a MSSQL database (never need to wri
 
 **Prerequisites:**
 
-* Install [Git](https://git-scm.com/)
-* Install [Node.js](https://nodejs.org/en/)
-* Install [Babel](https://babeljs.io/docs/usage/cli/)
+* [Git](https://git-scm.com/)
+* [Node.js](https://nodejs.org/en/)
+* [Babel](https://babeljs.io/docs/usage/cli/)
 
 **Installation:**
 

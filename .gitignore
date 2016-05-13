@@ -49,7 +49,7 @@ coverage
 node_modules
 
 # babel build directory
-build
+# build
 
 # Optional npm cache directory
 .npm
