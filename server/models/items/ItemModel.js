@@ -1,7 +1,7 @@
 import Conn from '../../db';
 import Sequelize from 'Sequelize';
 
-// Assuming you have an 'Items' table in your SQL database, with at lest these fopur columns
+// Assuming you have an 'Items' table in your SQL database, with at least these four columns
 
 const ItemModel = Conn.define('Items', {
   name: {
