@@ -1,18 +1,18 @@
 {
   "name": "graphql-test1",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "An old project from the early days of GraphQL.",
   "main": "server.js",
   "scripts": {
-    "clean": "RD /S /Q build && mkdir build",
+    "clean": "rimraf build && mkdir build",
     "babel-node": "babel-node",
     "build-server": "babel -d ./build ./server -s",
     "build": "npm run clean && npm run build-server",
     "start": "npm run build && node -- build/server.js",
     "test": "mocha --require @babel/register"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Patrick Metzdorf <patrick.metzdorf@gmail.com>",
+  "license": "MIT",
   "eslintConfig": {
     "parserOptions": {
       "ecmaVersion": 6,
@@ -49,6 +49,7 @@
     "@babel/register": "^7.4.4",
     "chai": "^3.5.0",
     "eslint": "^2.7.0",
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "rimraf": "^2.6.3"
   }
 }
