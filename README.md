@@ -1,5 +1,7 @@
 # GQL2SQL API Service
 
+**NOTE: This project is over 3 years old, from the beginnings of GraphQL, and won't be maintained. By now there are good tools available, such as [Apollo](https://medium.com/infocentric/setup-a-graphql-api-with-apollo-2-0-sequelize-and-express-js-608d1365d776). Don't waste your time here, look at those instead!!**
+
 This simple node app serves as example of a GraphQL API service in front of a legacy SQL database.
 It shows usage of Sequelize to interact with a MSSQL database (never need to write a single SQL command), and some tooling like:
 
@@ -49,17 +51,17 @@ Btw, using the combination of GraphQL with a SQL ORM, the API Service is also se
 
 ## TODOs
 
-| Backlog | In Progress | Done  |
-| --------|---------|-------|
-|         |         | Connect with MSSQL |
-|         |         | Add GraphiQL IDE |
-|         |         | Use Sequalize ORM |
-|         |         | Central Configuration |
-|         |         | Items Schema |
-| Service Authentication |         |       |
-| |         | Logging (Winston -> Loggly)|
-|  | | Test examples |
-|  | | Process Runner/Cluster |
-| Change to Apollo Tools |         |       | |
+| Backlog                | In Progress | Done                        |
+| ---------------------- | ----------- | --------------------------- |
+|                        |             | Connect with MSSQL          |
+|                        |             | Add GraphiQL IDE            |
+|                        |             | Use Sequalize ORM           |
+|                        |             | Central Configuration       |
+|                        |             | Items Schema                |
+| Service Authentication |             |                             |
+|                        |             | Logging (Winston -> Loggly) |
+|                        |             | Test examples               |
+|                        |             | Process Runner/Cluster      |
+| Change to Apollo Tools |             |                             |  |
 
 ...
