@@ -36,7 +36,7 @@
     "express-graphql": "^0.4.5",
     "graphiql": "^0.13.0",
     "graphql": "^0.4.14",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "sequelize": "^5.15.1",
     "tedious": "^1.13.1",
     "winston": "^2.2.0",
