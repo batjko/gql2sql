@@ -3,7 +3,7 @@ Keep your resolvers in the same file as the schema definition for the fields the
 */
 
 import { gql } from 'apollo-server'
-import { getBooks, getBookById } from '../../providers/db/index.js'
+import { getBooks, getBookById } from '../../providers/booksDB/index.js'
 
 export const Book = gql`
   type Book {

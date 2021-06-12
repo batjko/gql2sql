@@ -1,5 +1,5 @@
 import { server } from './src/server.js'
-import { ensureSeedData } from './src/providers/db/index.js'
+import { ensureSeedData } from './src/providers/booksDB/index.js'
 
 // launch the server
 const { url } = await server.listen(process.env.PORT || 3000)
