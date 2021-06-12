@@ -70,6 +70,8 @@ Check the `src/providers/booksDB` folder for how we handle our SQL database usin
 2. `npm install`
 3. `npm start` launches nodemon for easy development
 
+NOTE: You can reset the SQLite DB anytime by running `npm run resetDB`.
+
 ## Run some queries
 
 Apollo Server comes with a querying UI out of the box.
@@ -96,7 +98,7 @@ Simply visit http://localhost:3000 and execute a GraphQL query, e.g.:
 
 ## TODO
 
-- [ ] Add a mutation
+- [x] Add a mutation
 - [x] Add a second data source
 - [x] Add a diagram of the architecture
 - [x] Document code more comprehensively
