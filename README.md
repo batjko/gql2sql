@@ -1,67 +1,62 @@
-# GQL2SQL API Service
+# GQL 2 SQL
 
-**NOTE: This project is over 3 years old, from the beginnings of GraphQL, and won't be maintained. By now there are good tools available, such as [Apollo](https://medium.com/infocentric/setup-a-graphql-api-with-apollo-2-0-sequelize-and-express-js-608d1365d776). Don't waste your time here, look at those instead!!**
+Simple example of a GraphQL server that connects to a SQL backend.
+To demonstrate this, we're using Apollo and Prisma respectively.
 
-This simple node app serves as example of a GraphQL API service in front of a legacy SQL database.
-It shows usage of Sequelize to interact with a MSSQL database (never need to write a single SQL command), and some tooling like:
+It's also accessing data from elsewhere, to demonstrate how GraphQL combines multiple sources.
 
-* Babel (full ES6, incl. imports for example)
-* Logging with Winston (console and Loggly)
-* Testing with Mocha and Chai
-* Linting (ESLint)
+## Technologies involved
 
-## Installation / Development
+- Node 15.3+ (because of [modules](https://blog.logrocket.com/es-modules-in-node-today/) and [top-level async/await](https://www.stefanjudis.com/today-i-learned/top-level-await-is-available-in-node-js-modules/#top-level-%60await%60-is-available-%22unflagged%22-in-node.js-since-%60v14.8%60))
+- [Apollo Server](https://www.apollographql.com/docs/apollo-server/getting-started/) (the GraphQL part)
+- [Prisma](https://github.com/prisma/prisma) (for the SQL part)
+- Axios (to call a Poem API as the second data source)
 
-**Prerequisites:**
+Also a few development convenience things, like [Nodemon](https://www.npmjs.com/package/nodemon) and the [prisma cli](https://www.prisma.io/docs/reference/api-reference/command-reference/).
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/en/)
-* [Babel](https://babeljs.io/docs/usage/cli/)
-* MSSQL (with an Items table as described in `models/items/ItemModel.js`)
+## How does it work
 
-Of course you can also implement your own Model by using the 'modules/items' folder as a guide. Once you have your own module folder, you will need to add the appropriate GraphQL resolve functions to the `Query.js` and `Mutation.js` files as well.
-Remember, this repo is meant as a guiding example, putting together a bunch of tools that you may want to make use of.
+**TODO**
 
-**Installation:**
+### Folder structure
 
-1. Clone this repo
-2. Install dependencies: `npm install`
-3. Run the service: `npm start`
+**TODO**
 
-Feel free to submit pull requests for enhancements!
+### GraphQL
 
-**Testing:**
+**TODO**
 
-1. `npm test` will run any tests in the `test` folder
+### SQL
 
-## Schema / Models
+**TODO**
 
-Currently only a generic model of "Items" has been implemented. It can serve as a guide to add more models to expose (both in Sequelize and GraphQL).
+## Running the server
 
-![screenshot](./server/Assets/images/graphiql_screenshot.png)
+1. Clone repo
+2. `npm install`
+3. `npm start` launches nodemon for easy development
 
-## GraphQL and Sequelize
+## Run some queries
 
-GraphQL is used as an efficient *abstraction layer* to read from or write to the MSSQL database, based on pre-defined data *schemas*. Unlike with REST APIs, with GraphQL you retrieve only what you query for, parameterized and fast.
-The response is always valid JSON, which makes working with the returned data very easy in most languages.
+Apollo Server comes with a querying UI out of the box.
 
-Behind the scenes, the SQL endpoints are managed by the [**Sequelize** ORM](http://docs.sequelizejs.com/), in order to abstract away from manually constructed SQL statements. Sequelize takes care of security, data type validations and transaction management when accessing the SQL back-end.
+Simply visit http://localhost:3000 and execute a GraphQL query, e.g.:
 
-Btw, using the combination of GraphQL with a SQL ORM, the API Service is also secure from SQL Injection, which is neat.
+```gql
+{
+  books {
+    id
+    title
+    author
+  }
+}
+```
 
-## TODOs
+## TODO
 
-| Backlog                | In Progress | Done                        |
-| ---------------------- | ----------- | --------------------------- |
-|                        |             | Connect with MSSQL          |
-|                        |             | Add GraphiQL IDE            |
-|                        |             | Use Sequalize ORM           |
-|                        |             | Central Configuration       |
-|                        |             | Items Schema                |
-| Service Authentication |             |                             |
-|                        |             | Logging (Winston -> Loggly) |
-|                        |             | Test examples               |
-|                        |             | Process Runner/Cluster      |
-| Change to Apollo Tools |             |                             |  |
-
-...
+- [ ] Add a mutation
+- [x] Add a second data source
+- [ ] Add a diagram of the architecture
+- [ ] Document code more comprehensively
+- [ ] Finish ReadMe
+- [ ] Maybe add a few tests?
