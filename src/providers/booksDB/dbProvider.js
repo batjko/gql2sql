@@ -40,3 +40,20 @@ export async function getBookById(id) {
 
   return book
 }
+
+export async function addBook(book) {
+  let result
+  try {
+    result = await client.book.create({
+      data: book,
+    })
+  } catch (error) {
+    console.error(error)
+    throw new Error(`Internal DB error: Unable to create new Book in DB.`)
+  } finally {
+    await client.$disconnect()
+  }
+
+  // Return the created book (now has the DB's "id" as well)
+  return result
+}

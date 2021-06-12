@@ -15,14 +15,24 @@ const Query = gql`
     hello: String
   }
 `
+const Mutation = gql`
+  type Mutation {
+    # Placeholder, as the real mutations get added elsewhere
+    _null: String
+  }
+`
 // Combine all types
-export const typeDefs = [Book, Poetry, Query]
+export const typeDefs = [Book, Poetry, Query, Mutation]
 
 // Combine all resolvers
 export const resolvers = {
   Query: {
     hello: () => 'World',
-    ...bookResolvers,
-    ...poemResolvers,
+    ...bookResolvers.Query,
+    ...poemResolvers.Query,
+  },
+  Mutation: {
+    ...bookResolvers.Mutation,
+    ...poemResolvers.Mutation,
   },
 }

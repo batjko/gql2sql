@@ -24,6 +24,8 @@ export const Poetry = gql`
 `
 
 export const poemResolvers = {
-  poems: () => getSomePoems(),
-  poem: () => getRandomPoem(),
+  Query: {
+    poems: () => getSomePoems(),
+    poem: () => getRandomPoem(),
+  },
 }
