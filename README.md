@@ -45,10 +45,11 @@ For the GraphQL Server, we use the most popular library around: [Apollo-Server](
 
 It gives us everything we need to handle GraphQL stuff:
 
-- The actual web server. We could also use ith an [existing API server](https://www.apollographql.com/docs/apollo-server/integrations/middleware/), e.g. Express, Koa, Fastify etc., but for our simple use case here, it works pretty well on its own.
+- The actual web server. We could also use it with an [existing API server](https://www.apollographql.com/docs/apollo-server/integrations/middleware/), e.g. Express, Koa, Fastify etc., but for our simple use case here, it works pretty well on its own.
 - It provides us with ways to assemble schema Type Definitions
 - It also gives us a way to hook in our resolvers that will get the data and send query responses back to the client.
 - As a convenience, it also gives us the `gql` string template to parse the GraphQL schema notations.
+- Finally, it comes with GraphQL Playground out of the box, which is handy during development.
 
 ### SQL
 
@@ -77,22 +78,6 @@ NOTE: You can reset the SQLite DB anytime by running `npm run resetDB`.
 Apollo Server comes with a querying UI out of the box.
 
 Simply visit http://localhost:3000 and execute a GraphQL query, e.g.:
-
-```gql
-{
-  books {
-    id
-    title
-    author
-  }
-  poem {
-    content
-    poet {
-      name
-    }
-  }
-}
-```
 
 ![Query Results](/images/queryResults.png)
 
