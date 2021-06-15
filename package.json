@@ -17,7 +17,7 @@
     "files": [
       "**/*.test.js"
     ],
-    "concurrency": 3,
+    "concurrency": 4,
     "verbose": true
   },
   "dependencies": {
