@@ -9,13 +9,13 @@ import { Book, bookResolvers } from './books/index.js'
 import { Poetry, poemResolvers } from './poetry/index.js'
 
 // Root query. It gets extended in Book and Poetry.
-const Query = gql`
+export const Query = gql`
   type Query {
     # Placeholder, as the query type gets extended elsewhere
     hello: String
   }
 `
-const Mutation = gql`
+export const Mutation = gql`
   type Mutation {
     # Placeholder, as the real mutations get added elsewhere
     _null: String
