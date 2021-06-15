@@ -5,19 +5,24 @@ import { server } from '../server.js'
 import { typeDefs, resolvers } from './index.js'
 
 test('Root Query succeeds without errors', async t => {
+  const query = gql`
+    {
+      hello
+    }
+  `
   const result = await server.executeOperation({ query })
 
   t.falsy(result.errors, 'Root Query operation returned errors.')
 })
 
 test('Root Query\'s "hello" query returns "World"', async t => {
-  const result = await server.executeOperation({ query })
-
   const query = gql`
     {
       hello
     }
   `
+  const result = await server.executeOperation({ query })
+
   t.deepEqual(
     result.data.hello,
     'World',
