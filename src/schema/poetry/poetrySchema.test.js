@@ -53,7 +53,7 @@ test('Poems Query returns array', async t => {
   `
   const result = await server.executeOperation({ query })
 
-  t.truthy(typeof result.data.poems === 'array', 'Poems not being returned')
+  t.truthy(Array.isArray(result.data.poems), 'Poems not being returned')
 })
 
 test('Poem resolvers include poem and poems functions', t => {
