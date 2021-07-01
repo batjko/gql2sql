@@ -1,7 +1,7 @@
 {
   "name": "gql2sql",
   "version": "2.0.0",
-  "description": "",
+  "description": "An example GraphQL API service connecting to a SQL database.",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,8 @@
     "test": "ava --timeout=20s",
     "test:watch": "ava --watch --timeout=20s"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["sql", "graphql", "nodejs", "prisma"],
+  "author": "Patrick Metzdorf <patrick.metzdorf@hey.com>",
   "license": "MIT",
   "ava": {
     "files": [
