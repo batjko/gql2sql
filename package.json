@@ -10,7 +10,12 @@
     "test": "ava --timeout=20s",
     "test:watch": "ava --watch --timeout=20s"
   },
-  "keywords": ["sql", "graphql", "nodejs", "prisma"],
+  "keywords": [
+    "sql",
+    "graphql",
+    "nodejs",
+    "prisma"
+  ],
   "author": "Patrick Metzdorf <patrick.metzdorf@hey.com>",
   "license": "MIT",
   "ava": {
