@@ -36,6 +36,6 @@
     "ava": "4.3.1",
     "axios-mock-adapter": "1.21.2",
     "nodemon": "2.0.19",
-    "prisma": "4.0.0"
+    "prisma": "4.2.1"
   }
 }
