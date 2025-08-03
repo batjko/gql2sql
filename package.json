@@ -35,7 +35,7 @@
   "devDependencies": {
     "ava": "4.3.3",
     "axios-mock-adapter": "1.21.2",
-    "nodemon": "2.0.19",
+    "nodemon": "3.1.10",
     "prisma": "4.3.1"
   }
 }
