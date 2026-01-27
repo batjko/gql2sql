@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server'
+import gql from 'graphql-tag'
 import { getRandomPoem, getSomePoems } from '../../providers/poems/index.js'
 
 export const Poetry = gql`

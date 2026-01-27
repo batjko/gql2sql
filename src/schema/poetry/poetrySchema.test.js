@@ -1,5 +1,5 @@
 import test from 'ava'
-import { gql } from 'apollo-server'
+import gql from 'graphql-tag'
 
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
@@ -33,8 +33,10 @@ test('Poem Query succeeds without errors', async t => {
       }
     }
   `
-  const result = await server.executeOperation({ query })
+  const response = await server.executeOperation({ query })
 
+  t.is(response.body.kind, 'single')
+  const result = response.body.singleResult
   t.falsy(result?.errors, 'Poem Query returned errors.')
 })
 
@@ -52,7 +54,10 @@ test('Poem returns correct structure', async t => {
       }
     }
   `
-  const result = await server.executeOperation({ query })
+  const response = await server.executeOperation({ query })
+
+  t.is(response.body.kind, 'single')
+  const result = response.body.singleResult
   t.deepEqual(result?.data?.poem, mockPoem, 'Poem response not as expected')
 })
 
@@ -64,8 +69,10 @@ test('Poems Query succeeds without errors', async t => {
       }
     }
   `
-  const result = await server.executeOperation({ query })
+  const response = await server.executeOperation({ query })
 
+  t.is(response.body.kind, 'single')
+  const result = response.body.singleResult
   t.falsy(result.errors, 'Poems Query returned errors.')
 })
 
@@ -77,8 +84,10 @@ test('(Random) Poem Query returns single Poem', async t => {
       }
     }
   `
-  const result = await server.executeOperation({ query })
+  const response = await server.executeOperation({ query })
 
+  t.is(response.body.kind, 'single')
+  const result = response.body.singleResult
   t.truthy(result?.data?.poem, 'Poem result is not returned')
 })
 
@@ -90,8 +99,10 @@ test('Poems Query returns array', async t => {
       }
     }
   `
-  const result = await server.executeOperation({ query })
+  const response = await server.executeOperation({ query })
 
+  t.is(response.body.kind, 'single')
+  const result = response.body.singleResult
   t.truthy(Array.isArray(result?.data?.poems), 'Invalid result for Poems query')
 })
 

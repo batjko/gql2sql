@@ -1,5 +1,5 @@
 import test from 'ava'
-import { gql } from 'apollo-server'
+import gql from 'graphql-tag'
 import { server } from '../server.js'
 
 import { typeDefs, resolvers } from './index.js'
@@ -10,8 +10,10 @@ test('Root Query succeeds without errors', async t => {
       hello
     }
   `
-  const result = await server.executeOperation({ query })
+  const response = await server.executeOperation({ query })
 
+  t.is(response.body.kind, 'single')
+  const result = response.body.singleResult
   t.falsy(result.errors, 'Root Query operation returned errors.')
 })
 
@@ -21,10 +23,12 @@ test('Root Query\'s "hello" query returns "World"', async t => {
       hello
     }
   `
-  const result = await server.executeOperation({ query })
+  const response = await server.executeOperation({ query })
 
+  t.is(response.body.kind, 'single')
+  const result = response.body.singleResult
   t.deepEqual(
-    result.data.hello,
+    result.data?.hello,
     'World',
     'Unexpected response to "hello" query.',
   )
@@ -33,7 +37,7 @@ test('Root Query\'s "hello" query returns "World"', async t => {
 test('typeDefs has at least two elements', t => {
   t.true(
     typeDefs.length >= 2,
-    "TypeDefs doesn't have at least Quyery and Mutation in it.",
+    "TypeDefs doesn't have at least Query and Mutation in it.",
   )
 })
 

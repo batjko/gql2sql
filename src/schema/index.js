@@ -3,7 +3,7 @@
   Some tips on managing your schema: https://www.apollographql.com/blog/backend/schema-design/modularizing-your-graphql-schema-code/
 */
 
-import { gql } from 'apollo-server'
+import gql from 'graphql-tag'
 
 import { Book, bookResolvers } from './books/index.js'
 import { Poetry, poemResolvers } from './poetry/index.js'

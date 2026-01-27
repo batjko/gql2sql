@@ -7,9 +7,9 @@ It's also accessing data from elsewhere, to demonstrate how GraphQL combines mul
 
 ## Technologies involved
 
-- Node 15.3+ (because of [modules](https://blog.logrocket.com/es-modules-in-node-today/) and [top-level async/await](https://www.stefanjudis.com/today-i-learned/top-level-await-is-available-in-node-js-modules/#top-level-%60await%60-is-available-%22unflagged%22-in-node.js-since-%60v14.8%60))
-- [Apollo Server](https://www.apollographql.com/docs/apollo-server/getting-started/) (the GraphQL part)
-- [Prisma](https://github.com/prisma/prisma) (for the SQL part)
+- Node 20+ (required by Apollo Server 5 and Prisma 7)
+- [Apollo Server 5](https://www.apollographql.com/docs/apollo-server/getting-started/) (the GraphQL part)
+- [Prisma 7](https://github.com/prisma/prisma) (for the SQL part, using the driver adapter pattern)
 - Axios (to call a Poem API as the second data source)
 
 Also a few development convenience things, like [Nodemon](https://www.npmjs.com/package/nodemon) and the [prisma cli](https://www.prisma.io/docs/reference/api-reference/command-reference/).
@@ -49,7 +49,7 @@ It gives us everything we need to handle GraphQL stuff:
 - It provides us with ways to assemble schema Type Definitions
 - It also gives us a way to hook in our resolvers that will get the data and send query responses back to the client.
 - As a convenience, it also gives us the `gql` string template to parse the GraphQL schema notations.
-- Finally, it comes with GraphQL Playground out of the box, which is handy during development.
+- Finally, it comes with Apollo Sandbox out of the box, which is handy during development.
 
 ### SQL
 
@@ -75,7 +75,7 @@ NOTE: You can reset the SQLite DB anytime by running `npm run resetDB`.
 
 ## Run some queries
 
-Apollo Server comes with a querying UI out of the box.
+Apollo Server comes with Apollo Sandbox, a querying UI, out of the box.
 
 Simply visit http://localhost:3000 and execute a GraphQL query, e.g.:
 
@@ -88,4 +88,4 @@ Simply visit http://localhost:3000 and execute a GraphQL query, e.g.:
 - [x] Add a diagram of the architecture
 - [x] Document code more comprehensively
 - [x] Finish ReadMe
-- [ ] Maybe add a few tests?
+- [x] Add tests (run with `npm test`)

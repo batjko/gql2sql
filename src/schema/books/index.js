@@ -2,7 +2,7 @@
 Keep your resolvers in the same file as the schema definition for the fields they implement. This will allow you to reason about your code efficiently.
 */
 
-import { gql } from 'apollo-server'
+import gql from 'graphql-tag'
 import {
   getBooks,
   getBookById,
