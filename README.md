@@ -79,7 +79,7 @@ Apollo Server comes with Apollo Sandbox, a querying UI, out of the box.
 
 Simply visit http://localhost:3000 and execute a GraphQL query, e.g.:
 
-![Query Results](/images/queryResults.png)
+<img width="1422" height="645" alt="image" src="https://github.com/user-attachments/assets/3fb26734-8341-424c-8f59-2c8d4d9fed00" />
 
 ## TODO
 
