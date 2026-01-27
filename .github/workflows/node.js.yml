@@ -4,10 +4,6 @@
 name: Run tests
 
 on: [push, pull_request]
-#   push:
-#     branches: [ master ]
-#   pull_request:
-#     branches: [ master ]
 
 jobs:
   test:
@@ -15,15 +11,16 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [15.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [22.x]
+        # Node 20+ required by Apollo Server 5 and Prisma 7
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'npm'
       - run: npm ci
-      #     - run: npm run build --if-present
+      - run: npx prisma generate
       - run: npm test
