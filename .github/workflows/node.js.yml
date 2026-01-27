@@ -11,8 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [22.x]
         # Node 20+ required by Apollo Server 5 and Prisma 7
 
     steps:
