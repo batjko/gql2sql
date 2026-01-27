@@ -13,6 +13,24 @@ const getResult = (response) => {
   return response.body.singleResult
 }
 
+// Helper to create a test book via mutation
+const createTestBook = async (title = `Test Book ${Date.now()}`, author = 'Test Author') => {
+  const mutation = gql`
+    mutation AddBook($title: String, $author: String) {
+      addBook(title: $title, author: $author) {
+        id
+        title
+        author
+      }
+    }
+  `
+  const response = await server.executeOperation({
+    query: mutation,
+    variables: { title, author }
+  })
+  return getResult(response).data.addBook
+}
+
 // Clean up after all tests
 test.after.always(async () => {
   await client.$disconnect()
@@ -55,6 +73,9 @@ test('books query returns an array', async t => {
 })
 
 test('books query returns books with correct structure', async t => {
+  // Ensure at least one book exists
+  await createTestBook('Structure Test Book', 'Structure Author')
+
   const query = gql`
     query {
       books {
@@ -77,13 +98,9 @@ test('books query returns books with correct structure', async t => {
 })
 
 test('book query returns a single book by id', async t => {
-  // First get a valid book id
-  const listQuery = gql`{ books { id } }`
-  const listResponse = await server.executeOperation({ query: listQuery })
-  const listResult = getResult(listResponse)
-  const bookId = listResult.data.books[0]?.id
-
-  t.truthy(bookId, 'Need at least one book in DB for this test')
+  // Create a book to query
+  const createdBook = await createTestBook('Single Query Test', 'Query Author')
+  const bookId = createdBook.id
 
   const query = gql`
     query GetBook($id: ID!) {
@@ -103,6 +120,8 @@ test('book query returns a single book by id', async t => {
   t.falsy(result.errors, 'book query returned errors')
   t.truthy(result.data?.book, 'book query should return a book')
   t.is(result.data.book.id, bookId, 'Returned book should have the requested id')
+  t.is(result.data.book.title, 'Single Query Test')
+  t.is(result.data.book.author, 'Query Author')
 })
 
 test('book query returns null for non-existent id', async t => {
