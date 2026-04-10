@@ -1,0 +1,15 @@
+type Poet {
+  name: String!
+}
+
+type Poem {
+  title: String!
+  content: String!
+  lineCount: Int!
+  poet: Poet!
+}
+
+extend type Query {
+  poem: Poem!
+  poems: [Poem!]!
+}

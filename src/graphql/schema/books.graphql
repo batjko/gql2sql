@@ -1,0 +1,17 @@
+type Book {
+  id: ID!
+  title: String!
+  author: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+input AddBookInput {
+  title: String!
+  author: String!
+}
+
+extend type Query {
+  books: [Book!]!
+  book(id: ID!): Book
+}

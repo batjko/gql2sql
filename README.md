@@ -1,91 +1,188 @@
 # GQL 2 SQL
 
-Simple example of a GraphQL server that connects to a SQL backend.
-To demonstrate this, we're using Apollo and Prisma respectively.
+`gql2sql` is a teaching-focused example of how to build a modern GraphQL API on top of SQL without stopping at the database. The app exposes books from SQLite through Prisma, combines that with poetry data from a public API, and keeps the codebase structured the way current TypeScript projects are usually built.
 
-It's also accessing data from elsewhere, to demonstrate how GraphQL combines multiple sources.
+## What this repo demonstrates
 
-## Technologies involved
+- Apollo Server 5 mounted on Express 5
+- Prisma ORM 7 with SQLite and driver adapters
+- strict TypeScript with generated GraphQL resolver types
+- Biome for formatting and linting
+- GraphQL SDL in `.graphql` files instead of inline strings
+- HTTP-level integration tests with Vitest and Supertest
+- agent-friendly repository conventions via `AGENTS.md`
 
-- Node 20+ (required by Apollo Server 5 and Prisma 7)
-- [Apollo Server 5](https://www.apollographql.com/docs/apollo-server/getting-started/) (the GraphQL part)
-- [Prisma 7](https://github.com/prisma/prisma) (for the SQL part, using the driver adapter pattern)
-- Axios (to call a Poem API as the second data source)
+## Requirements
 
-Also a few development convenience things, like [Nodemon](https://www.npmjs.com/package/nodemon) and the [prisma cli](https://www.prisma.io/docs/reference/api-reference/command-reference/).
+- Node 22 or newer
+- npm 10 or newer
 
-## How does it work
-
-The architecture is structured in a way that the different stages of a GraphQL request are clearly separated:
+## Architecture
 
 ![Design](/images/architecture.png)
 
-When a request with a GraphQL query comes in, the following happens:
+The request flow is intentionally simple and explicit:
 
-1. The GraphQL schema is the definition for the API and so the request gets validated against that definition (e.g. if the query is defined, if the requested fields and parameters exist etc).
-2. Then the resolvers, which receive the query details as function parameters, are executed.
-3. The resolvers now make whatever backend calls they need to make to get the data the query was asking for. In our case the resolvers simply call provider functions and return the provider's responses back to the client who sent the query.
-4. We choose to use "providers" as abstractions over our backend resources, so the resolvers don't need to know if the data comes from a database or a third-party API, for example. This allows us to replace those data sources later on, if we need to, without having to mess with the resolvers. It also keeps our resolver logic clear and easy to understand.
+1. Express receives HTTP requests and Apollo handles GraphQL execution at `/graphql`.
+2. SDL files in `src/graphql/schema` define the public contract.
+3. Typed resolvers translate GraphQL operations into service calls.
+4. Services coordinate domain rules and delegate persistence to repositories.
+5. Prisma talks to SQLite for books, while a dedicated poetry client fetches a second upstream data source.
 
-### Folder structure
+This separation keeps the repo readable for learners and gives coding agents a clear place to make targeted changes.
 
-You are free to organise your code in whatever way you like, but the structure we chose here makes a lot of sense for what we need.
+## Project layout
 
-- All our actual code is under a single `src` folder (apart from project config files)
-- Within `src` we have a `schema` and a `providers` folder, clearly separating these responsibilities.
-- Currently our resolvers are part of our schema files to keep all that together. However, if resolvers become more complex, you might want to consider extractiung them into their own folder as well.
-- You can see that, both under the `providers` and the `schema` folder, we distinguish between the two different data domains we support: `books` and `poetry`. It's nice and clean, and allows you to easily find what you're looking for.
-- When you use the Prisma CLI it automatically creates a prisma folder at the top level, to keep its own config, and since we are using SQLite here, the DB file is also in that folder by default.
-
-There is also an `images` folder in this repo, which just holds the assets for this README.
-
-### GraphQL
-
-For the GraphQL Server, we use the most popular library around: [Apollo-Server](https://www.apollographql.com/docs/apollo-server/).
-
-It gives us everything we need to handle GraphQL stuff:
-
-- The actual web server. We could also use it with an [existing API server](https://www.apollographql.com/docs/apollo-server/integrations/middleware/), e.g. Express, Koa, Fastify etc., but for our simple use case here, it works pretty well on its own.
-- It provides us with ways to assemble schema Type Definitions
-- It also gives us a way to hook in our resolvers that will get the data and send query responses back to the client.
-- As a convenience, it also gives us the `gql` string template to parse the GraphQL schema notations.
-- Finally, it comes with Apollo Sandbox out of the box, which is handy during development.
-
-### SQL
-
-It's a pretty traditional need to access a SQL database from our GraphQL server.
-Lots of so-called [ORMs](https://www.sitepoint.com/javascript-typescript-orms/) exist to do this, most notable Sequelize and Knex.
-But recently [Prisma](https://www.prisma.io/) has made waves and so we're using it for our example here.
-
-Check the `src/providers/booksDB` folder for how we handle our SQL database using Prisma:
-
-- In `dbClient.js` we initialize our Prisma client, which we will use to execute all our SQL requests.
-- In `dbProvider.js`, we execute the actual queries against the DB, using the prisma client.
-- We create a few records in our database when the server starts, via the `ensureSeedData()` function in `seed.js`, in case the database is empty. This way we have some data to query, no matter what.
+- `src/server.ts`: startup, env loading, graceful shutdown
+- `src/app.ts`: Express and Apollo composition
+- `src/config`: environment parsing and logging
+- `src/graphql`: SDL files, generated resolver types, and resolvers
+- `src/services`: domain services and the poetry API client
+- `src/data`: Prisma client factory and repositories
+- `prisma`: schema, migrations, and seed script
 
 ![Prisma Model autocomplete](/images/PrismaAutocomplete.png)
 
-## Running the server
+## Quickstart
 
-1. Clone repo
-2. `npm install`
-3. `npm start` launches nodemon for easy development
+1. Install dependencies:
 
-NOTE: You can reset the SQLite DB anytime by running `npm run resetDB`.
+   ```bash
+   npm install
+   ```
 
-## Run some queries
+2. Copy the example environment file:
 
-Apollo Server comes with Apollo Sandbox, a querying UI, out of the box.
+   ```bash
+   cp .env.example .env
+   ```
 
-Simply visit http://localhost:3000 and execute a GraphQL query, e.g.:
+3. Generate the Prisma client, apply the committed migration, and seed the database:
+
+   ```bash
+   npm run db:generate
+   npm run db:migrate
+   npm run db:seed
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open `http://localhost:3000/graphql`.
+
+Apollo Sandbox is enabled in development, so you can browse the schema and execute operations directly in the browser.
+
+## Example operations
+
+Query all books:
+
+```graphql
+query GetBooks {
+  books {
+    id
+    title
+    author
+    createdAt
+  }
+}
+```
+
+Query one book by id:
+
+```graphql
+query GetBook($id: ID!) {
+  book(id: $id) {
+    id
+    title
+    author
+  }
+}
+```
+
+Create a book with a modern input object:
+
+```graphql
+mutation AddBook($input: AddBookInput!) {
+  addBook(input: $input) {
+    id
+    title
+    author
+  }
+}
+```
+
+Variables:
+
+```json
+{
+  "input": {
+    "title": "Kindred",
+    "author": "Octavia E. Butler"
+  }
+}
+```
+
+Query poems from the external provider:
+
+```graphql
+query GetPoetry {
+  poem {
+    title
+    content
+    lineCount
+    poet {
+      name
+    }
+  }
+  poems {
+    title
+    poet {
+      name
+    }
+  }
+}
+```
 
 <img width="1422" height="645" alt="image" src="https://github.com/user-attachments/assets/3fb26734-8341-424c-8f59-2c8d4d9fed00" />
 
-## TODO
+## Scripts
 
-- [x] Add a mutation
-- [x] Add a second data source
-- [x] Add a diagram of the architecture
-- [x] Document code more comprehensively
-- [x] Finish ReadMe
-- [x] Add tests (run with `npm test`)
+- `npm run dev`: watch mode with `tsx`
+- `npm run build`: generate Prisma client, run GraphQL codegen, and compile TypeScript
+- `npm run typecheck`: strict TypeScript verification
+- `npm run lint`: Biome checks
+- `npm run format`: Biome formatting
+- `npm run test`: Vitest suite
+- `npm run db:generate`: Prisma client generation
+- `npm run db:migrate`: apply the committed migration set
+- `npm run db:reset`: reset the local database
+- `npm run db:seed`: seed the database
+- `npm run db:studio`: open Prisma Studio
+
+## QA workflow
+
+Run the same checks expected in CI:
+
+```bash
+npm run lint
+npm run typecheck
+npm run test
+```
+
+For a clean local reset:
+
+```bash
+npm run db:reset
+npm run db:seed
+```
+
+## Notes for contributors and agents
+
+- Keep schema changes in `.graphql` files and regenerate types with `npm run codegen`.
+- Keep persistence logic out of resolvers.
+- If the Prisma schema changes, rerun `npm run db:generate` and update migrations.
+- To author a brand-new Prisma migration locally, use `npx prisma migrate dev --name <change>` on Node 22 and commit the generated SQL.
+- See `AGENTS.md` for repository-specific coding guidance.

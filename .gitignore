@@ -1,1 +1,9 @@
 node_modules
+dist
+coverage
+.env
+.DS_Store
+plans
+prisma/*.db
+prisma/*.db-journal
+src/generated/prisma

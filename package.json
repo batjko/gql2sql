@@ -1,43 +1,65 @@
 {
   "name": "gql2sql",
-  "version": "2.0.0",
-  "description": "An example GraphQL API service connecting to a SQL database.",
+  "version": "3.0.0",
+  "description": "A modern GraphQL-to-SQL teaching showcase built with Apollo Server, Prisma, TypeScript, and SQLite.",
   "type": "module",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "resetDB": "prisma migrate reset",
-    "test": "ava --timeout=20s",
-    "test:watch": "ava --watch --timeout=20s"
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "build": "npm run db:generate && npm run codegen && tsc -p tsconfig.json",
+    "typecheck": "npm run db:generate && npm run codegen && tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "test": "npm run db:generate && npm run codegen && vitest run",
+    "test:watch": "npm run db:generate && npm run codegen && vitest",
+    "codegen": "graphql-codegen --config codegen.ts",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
+    "db:reset": "prisma migrate reset --force",
+    "db:seed": "prisma db seed",
+    "db:studio": "prisma studio"
   },
   "keywords": [
     "sql",
     "graphql",
     "nodejs",
-    "prisma"
+    "typescript",
+    "prisma",
+    "apollo"
   ],
   "author": "Patrick Metzdorf <patrick.metzdorf@hey.com>",
   "license": "MIT",
-  "ava": {
-    "files": [
-      "**/*.test.js"
-    ],
-    "concurrency": 4,
-    "verbose": true
+  "engines": {
+    "node": ">=22"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
-    "@apollo/server": "^5.5.0",
-    "@prisma/adapter-better-sqlite3": "^7.3.0",
-    "@prisma/client": "^7.3.0",
-    "axios": "^1.13.5",
-    "dotenv": "^16.5.0",
+    "@apollo/server": "^5.0.0",
+    "@as-integrations/express5": "^1.0.0",
+    "@graphql-tools/load-files": "^7.0.0",
+    "@graphql-tools/merge": "^9.0.0",
+    "@prisma/adapter-better-sqlite3": "^7.0.0",
+    "@prisma/client": "^7.0.0",
+    "dotenv": "^16.0.0",
+    "express": "^5.0.0",
     "graphql": "^16.11.0",
-    "graphql-tag": "^2.12.6"
+    "zod": "^4.0.0"
   },
   "devDependencies": {
-    "ava": "^6.2.0",
-    "axios-mock-adapter": "^2.1.0",
-    "nodemon": "^3.1.10",
-    "prisma": "^7.6.0"
+    "@biomejs/biome": "^2.0.0",
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/typescript": "^4.0.0",
+    "@graphql-codegen/typescript-resolvers": "^4.0.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^24.0.0",
+    "@types/supertest": "^6.0.0",
+    "prisma": "^7.0.0",
+    "supertest": "^7.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.0"
   }
 }
